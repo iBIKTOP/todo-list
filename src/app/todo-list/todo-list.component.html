@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="card shadow mt-5 bg-white rounded">
+    <div class="card-header text-center h2 text-muted font-weight-bold">СПИСОК ЗАДАЧ</div>
+    <div class="card-body">
+      <div class="list-group">
+
+        <div class="list-group-item">
+          <div class="row m-0 p-0 align-items-center">
+            <div class="col-9">
+              <div class="row m-3">
+                <div class="col-1 text-right pr-0">
+                  <i class="fas fa-tasks myIcon" [ngClass]="{myIconFocus: bool}"></i>
+                  <!--<i class="myIcon material-icons" [ngClass]="{myIconFocus: bool}">fiber_new</i>-->
+                </div>
+                <div class="col-11">
+                  <label class="myLabel" for="myInput" [ngClass]="{myLabelFocus:bool}">Добавление (Редактирование) задачи</label>
+                  <input type="text" id="myInput" class="myInput m-0 p-0" [(ngModel)]="newText" [ngClass]="{myInputFocus:bool}" (focus)='isFocus()' (focusout)='noFocus()'/>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 text-right">
+              <button class="myButton w-100" (click)="saveTodo()">СОХРАНИТЬ</button>
+            </div>
+          </div>
+        </div>
+
+        <!--выводим список задач-->
+        <div class="list-group-item list-group-item-action pr-0" *ngFor='let todo of todos; let i = index'>
+            <div class="row m-0 p-0">
+              <div class="col-1 mt-auto mb-auto">
+                <i class="far {{todo.done ? 'fa-check-circle' : 'fa-circle' }}" (click)="getToggleDone(todo)"></i>
+              </div>
+              <div class="col-10 mt-auto mb-auto h5">
+                <div class="form-check">
+                  <span [ngClass]="{textDecoration: todo.done}">{{ todo.name }}</span>
+                </div>
+              </div>
+              <div class="col-1 text-right mr-0 mt-auto mb-auto">
+                <!--<button class="btn btn-sm mr-3 {{todo.done ? 'btn-warning' : 'btn-light' }}" (click)="getToggleDone(todo)">{{todo.done ? 'Выполнена' : 'Выполнить' }}</button>-->
+                <span *ngIf = "!todo.done">
+                  <i class="fas fa-pencil-alt" (click)="getEditTodo(i,todo)"></i>
+                </span>
+                <span *ngIf = "todo.done">
+                  <i class="fas fa-times" (click)="getRemoveTodo(i)"></i>
+                </span>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted">Вербицкий Виктор. Группа №33. Академия IMT</div>
+  </div>
+</div>

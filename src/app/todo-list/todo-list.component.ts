@@ -1,29 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import {Todo} from './todo';
-import {TodoService} from '../todo.service';
+import { Component, OnInit } from "@angular/core";
+import { Todo } from "./todo";
+import { TodoService } from "./todo.service";
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  selector: "app-todo-list",
+  templateUrl: "./todo-list.component.html",
+  styleUrls: ["./todo-list.component.css"]
 })
 export class TodoListComponent implements OnInit {
   todos: Todo[];
-  newText = '';
+  newText = "";
   bool: boolean;
   i: number = null;
   isFocus(): void {
     this.bool = true;
   }
   noFocus(): void {
-    (this.newText !== '') ? this.bool = true : this.bool = false;
+    this.newText !== "" ? (this.bool = true) : (this.bool = false);
   }
   getTodos(): void {
     this.todos = this.todoService.getTodos();
   }
   saveTodo(): void {
     this.todoService.addNewTodo(this.i, this.newText);
-    this.newText = '';
+    this.newText = "";
     this.noFocus();
   }
   getToggleDone(todo): void {
